@@ -1,0 +1,90 @@
+<section class="mt-4">
+		<div class="container">
+			<div class="d-flex flex-wrap align-items-center mb-2 ">
+				<div class="col-first">
+					<h3>Order Details</h3>
+					{{!-- <nav class="d-flex align-items-center">
+						<a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
+						<a href="#">Shop<span class="lnr lnr-arrow-right"></span></a>
+						<a href="category.html">Fashion Category</a>
+					</nav> --}}
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+				<section>
+   <div class="card shadow-0 border mb-4">
+     {{#each products}}
+    
+
+              <div class="card-body card-bordered">
+               
+                <div class="row">
+
+
+					
+                  <div class="col-md-2">
+                    <img class="img-fluid" src="/product-images/{{this.result._id}}.jpg"
+                                                style="width: 100px; height: 100px;" alt="">
+                  </div>
+                  <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                    <p class="text-muted mb-0">{{this.result.Name}}</p>
+                  </div>
+                  {{!-- <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                    <p class="text-muted mb-0 small">White</p>
+                  </div> --}}
+                  <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                    <p class="text-muted mb-0 small">{{this.result.Category}}</p>
+                  </div>
+                  <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                    <p class="text-muted mb-0 small">Qty: {{this.products.quantity}}</p>
+                  </div>
+                  <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                    <p class="text-muted mb-0 small">₹{{this.result.Price}}</p>
+                  </div>
+
+
+
+				
+                </div>
+				
+                {{!-- <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;"> --}}
+                {{!-- <div class="row d-flex align-items-center">
+                  <div class="col-md-2">
+                    <p class="text-muted mb-0 small">Track Order</p>
+                  </div>
+                  <div class="col-md-10">
+                    <div class="progress" style="height: 6px; border-radius: 16px;">
+                      <div class="progress-bar" role="progressbar"
+                        style="width: 65%; border-radius: 16px; background-color: #a8729a;" aria-valuenow="65"
+                        aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="d-flex justify-content-around mb-1">
+                      <p class="text-muted mt-1 mb-0 small ms-xl-5">Out for delivary</p>
+                      <p class="text-muted mt-1 mb-0 small ms-xl-5">Delivered</p>
+                    </div>
+                  </div>
+                </div> --}}
+
+               
+
+               
+              </div>
+               {{/each}}
+            </div>
+            {{#with value}}
+
+
+                {{#if status}}
+                <a class="btn btn-success mb-5 ml-5" href="#" role="button">Your Item Delivered Successfully....</a>
+                
+                {{else}}
+                <a class="btn btn-danger mb-5 ml-5" href="/item-cancelled/{{this.id}}" role="button">Cancel Order</a>
+                {{/if}}
+
+                {{/with}}
+
+            
+</section>

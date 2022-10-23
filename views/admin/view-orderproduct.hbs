@@ -1,0 +1,107 @@
+
+
+
+
+
+
+
+  <section>
+  
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-8 col-xl-6">
+        <div class="card border-top border-bottom border-3" style="border-color: #f37a27 !important;">
+          <div class="card-body p-5">
+
+            <p class="lead fw-bold mb-5" style="color: #f37a27;">Prodcut Delivery</p>
+{{#each products}}
+            <div class="col-md-2">
+              <img src="/product-images/{{this.result._id}}.jpg" style="height=5rem"  class="img-fluid" alt="IMAGE">
+            </div>
+
+            <div class="row">
+              <div class="col mb-3">
+                <p class="small text-muted mb-1">Date</p>
+                <p>{{this.date}}</p>
+              </div>
+              <div class="col mb-3">
+                <p class="small text-muted mb-1">Product Id</p>
+                <p>{{this.products.item}}</p>
+              </div>
+            </div>
+
+            <div class="mx-n5 px-5 py-4" style="background-color: #f2f2f2;">
+              <div class="row">
+                <div class="col-md-8 col-lg-9">
+                  <p>{{this.result.Name}}</p>
+                </div>
+                <div class="col-md-4 col-lg-3">
+                  <p>₹{{this.result.Price}}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-8 col-lg-9">
+                  <p class="mb-0">Quantity</p>
+                </div>
+                <div class="col-md-4 col-lg-3">
+                  <p class="mb-0">{{this.products.quantity}}</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="row my-4">
+              <div class="col-md-4 offset-md-8 col-lg-3 offset-lg-9">
+                <p class="lead fw-bold mb-0" style="color: #f37a27;">₹{{totalAmount}}</p>
+              </div>
+            </div>
+              {{/each}}
+
+            <p class="lead fw-bold mb-4 pb-2" style="color: #f37a27;">Tracking Order</p>
+
+            <div class="row">
+              <div class="col-lg-12">
+
+                <div class="horizontal-timeline">
+                  {{#with buttonchange}}
+                  {{#if pack}}
+                  <ul class="list-inline items d-flex justify-content-between">
+                    <li class="list-inline-item items-list">
+                      <a href="/admin/item-packed/{{id}} " class="btn btn-danger mt-5">Packed</a>
+                    </li>
+                     
+
+                    {{/if}}
+
+                    {{#if status}}
+
+                    <li class="list-inline-item items-list">
+                      <a href="/admin/item-shipped/{{id}} " class="btn btn-danger mt-5">Shipped</a>
+                    </li>
+
+                    {{else}}
+                    
+                    <li class="list-inline-item items-list text-end" style="margin-right: 8px;">
+                      <a href="/admin/item-delivered/{{id}} " class="btn btn-primary mt-5">Delivered</a>
+                    </li>
+                    {{/if}}
+                  </ul>
+
+
+                  {{/with}}
+
+                </div>
+
+              </div>
+            </div>
+
+            <p class="mt-4 pt-2 mb-0">Want any help? <a href="#!" style="color: #f37a27;">Please contact
+                us</a></p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+

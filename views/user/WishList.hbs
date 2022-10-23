@@ -1,0 +1,72 @@
+<section></section>
+<div class="container mt-3">
+    <div class="my-4"><h4>Wishlist</h4></div>
+<table class="table table-borderless">
+  <thead>
+    
+    <tr>
+      <th scope="col">Product</th>
+      
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+    </tr>
+  </thead>
+  <tbody class="text-wrap text-warning">
+    {{#each products}}
+    <tr>
+      <td><a href="/single-product/{{this.products._id}}"><img src="/product-images/{{this.products._id}}.jpg"
+                                            style="height: 50px; width:50px" alt=""></a>
+                                    </td>
+      <td>{{this.products.Name}}</td>
+      <td>{{this.products.Price}}</td>
+      
+      <td ><button onclick="addToCart('{{products._id}}')" class="btn btn-success">Add to
+                                    Cart</button></td>
+                                    <td><button class="btn btn-danger"
+                                        onclick="removeProduct('{{this._id}}','{{this.products._id}}')">Remove</button></td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+</div>
+</section>
+
+<script>
+  function addToCart(prodId) {
+  $.ajax({
+    url: "/add-to-cart/" + prodId,
+    method:"get",
+    success: (response) => {
+      if (response.status) {
+        let count = $("#cart-count").html();
+        count = parseInt(count) + 1;
+        $("#cart-count").html(count);
+      } else {
+        location.href = "/userLogin";
+      }
+    },
+  });
+}
+</script>
+
+<script>
+    function removeProduct(wishId,prodId){
+            $.ajax({
+                url:'/delete-wishItem/'+wishId+'/'+prodId,
+                method:'get',
+                success:(response)=>{
+                    if(response.removeProduct){
+                        alert('Do you want to remove the product')
+                        //Swal.fire(
+  //'Product removed!',
+ // 'You clicked the button!',
+ // 'success'
+//)
+                        location.reload()
+                       // $("#myDiv").load(location.href + " #myDiv");
+                        $("#wishlist-count").load(location.href+" #wishlist-count");
+                    }
+                }
+            })
+        }
+</script>

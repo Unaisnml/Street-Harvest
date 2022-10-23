@@ -1,0 +1,176 @@
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description" content="Ashion Template" />
+  <meta name="keywords" content="Ashion, unica, creative, html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Ashion | Template</title>
+
+  <!-- Google Font -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cookie&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  />
+  <!-- Bootstrap link -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+    crossorigin="anonymous"
+  />
+
+  <link
+    rel="stylesheet"
+    href="/user/assets/css/bootstrap.min.css"
+    type="text/css"
+  />
+  <link
+    rel="stylesheet"
+    href="/user/assets/css/font-awesome.min.css"
+    type="text/css"
+  />
+  <link
+    rel="stylesheet"
+    href="/user/assets/css/elegant-icons.css"
+    type="text/css"
+  />
+  <link
+    rel="stylesheet"
+    href="/user/assets/css/jquery-ui.min.css"
+    type="text/css"
+  />
+  <link
+    rel="stylesheet"
+    href="/user/assets/css/magnific-popup.css"
+    type="text/css"
+  />
+  <link
+    rel="stylesheet"
+    href="/user/assets/css/owl.carousel.min.css"
+    type="text/css"
+  />
+  <link
+    rel="stylesheet"
+    href="/user/assets/css/slicknav.min.css"
+    type="text/css"
+  />
+  <link rel="stylesheet" href="/user/assets/css/style.css" type="text/css" />
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  {{! ajax-jquery-link }}
+  <script
+    src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+  ></script>
+
+  <link
+    rel="stylesheet"
+    href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+  />
+
+</head>
+
+<!-- Header Section Begin -->
+<header class="header">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xl-3 col-lg-2 sticky">
+        <div class="header__logo">
+          <a href="/">
+            <img
+              src="/product-images/logo.png"
+              style="height:3rem ;"
+              alt="logo"
+            />
+          </a>
+          {{! <a href="./index.html"><img src="user/assets/img/logo.png" alt=""></a> }}
+        </div>
+      </div>
+      <div class="col-xl-6 col-lg-7">
+        <nav class="header__menu">
+          <ul>
+            <li class="active"><a href="/">Home</a></li>
+            {{#each category}}
+              <li class="" data-filter="*"><a
+                  href="/category?category={{this.category}}"
+                >{{this.category}}</a></li>
+            {{/each}}
+
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="col-lg-3">
+        <div class="header__right">
+          <div class="header__right__auth">
+            {{#if users}}
+          
+
+              <div class="btn-group">
+<button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+    {{users.Name}}
+  </button>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item font-weight-bold text-primary" href="/profile">My Profile</a></li>
+    <li><a class="dropdown-item font-weight-bold text-primary" href="/orders">My Orders</a></li>
+    <li><a class="dropdown-item font-weight-bold text-primary" href="/userLogout">Logout</a></li>
+  </ul>
+</div>
+            {{else}}
+              <div class="btn-group">
+  <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+    Account
+  </button>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item font-weight-bold text-primary" href="/userLogin">Login</a></li>
+    <li><a class="dropdown-item font-weight-bold text-primary" href="/userSignup">Signup</a></li>
+  </ul>
+</div>
+            {{/if}}
+          </div>
+          <ul class="header__right__widget">
+            <li><span class="icon_search search-switch"></span></li>
+            {{#if users}}
+              <li><a href="/wishList"><span class="icon_heart_alt"></span>
+                  <div class="tip" id="whishlist-count">{{wishListCount}}</div>
+                </a></li>
+              <li><a href="/cart"><span class="icon_bag_alt"></span>
+                  <div class="tip" id="cart-count">{{cartCount}}</div>
+                </a></li>
+            {{/if}}
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="canvas__open">
+      <i class="fa fa-bars"></i>
+    </div>
+  </div>
+</header>
+<!-- Header Section End -->
+{{{body}}}
+
+<!-- Js Plugins -->
+<script src="/user/assets/js/jquery-3.3.1.min.js"></script>
+<script src="/user/assets/js/bootstrap.min.js"></script>
+<script src="/user/assets/js/jquery.magnific-popup.min.js"></script>
+<script src="/user/assets/js/jquery-ui.min.js"></script>
+<script src="/user/assets/js/mixitup.min.js"></script>
+<script src="/user/assets/js/jquery.countdown.min.js"></script>
+<script src="/user/assets/js/jquery.slicknav.js"></script>
+<script src="/user/assets/js/owl.carousel.min.js"></script>
+<script src="/user/assets/js/jquery.nicescroll.min.js"></script>
+<script src="/user/assets/js/main.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<!-- Bootstrap script -->
+
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+  crossorigin="anonymous"
+></script>
+
+
+<script src="/user/assets/js/script.js"></script>

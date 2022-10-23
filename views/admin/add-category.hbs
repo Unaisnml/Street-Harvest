@@ -1,0 +1,55 @@
+<section>
+  <div class="pcoded-content">
+    <div class="container row">
+      <div class="ml-5 col-md-6">
+        <h2 class="text-center mt-5">Add New Category</h2>
+        <form id="addCategoryForm"
+          action="/admin/add-category"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          <label for="">Category Name</label>
+          <input type="text" name="category" class="form-control" required />
+          <div>
+          <button type="submit" class="btn btn-success mt-4">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+    crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+
+    $("#addCategoryForm").on('submit', (e) => {
+        e.preventDefault();
+        const form = document.getElementById('addCategoryForm')
+        let data = $('#addCategoryForm').serialize()
+        $.ajax({
+            url: '/admin/add-category',
+            method: 'post',
+            data: data,
+            success: (response) => {
+
+                if (response.exist) {
+                  
+                   Swal.fire({
+  icon: 'error',
+  title: 'Oops...',
+  text: 'Category Already Exist',
+  
+})
+                   
+                } else {
+                    location.reload();
+                }
+            }
+        })
+    })
+
+</script>

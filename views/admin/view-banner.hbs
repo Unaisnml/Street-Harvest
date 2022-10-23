@@ -1,0 +1,46 @@
+
+<section>
+  <div class="pcoded-content">
+    <div class="mx-2">
+
+      <div class="d-flex flex-row-reverse">
+        <a href="/admin/add-banner" class="btn btn-success mt-5">Add Banner</a>
+      </div>
+
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Sl.No</th>
+            <th scope="col">Banner Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Image</th>
+            <th scope="col">Options</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          {{#each banners}}
+            <tr>
+              <td>{{inc @index}}</td>
+              <td>{{this.Name}}</td>
+              <td>{{this.Description}}</td>
+              <td><img
+                  src="/banner-images/{{this._id}}.jpg"
+                  style="width: 60px; height: 60px; "
+                  alt=""
+                /></td>
+              <td>
+               
+                <a
+                  href="/admin/delete-banner/{{this._id}}"
+                  class="btn btn-danger"
+                  onclick="return confirm ('Are you sure to delete {{this.Name}} ?')">Delete</a>
+              </td>
+            </tr>
+          {{/each}}
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

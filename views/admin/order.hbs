@@ -1,0 +1,56 @@
+<section>
+    {{!-- <div class="container ms-5 ">
+        <div class="row ms-5"> --}}
+
+            <div class="pcoded-content">
+    <div class="mx-2">
+        <table class="table bordered mt-" id="orderTable">
+            <thead >
+                <tr>
+                     <th scope="col">OrderID</th>
+                     <th scope="col">Date</th>
+                    <th scope="col">Mobile</th>
+                     <th scope="col">Payment</th>
+                    <th scope="col">Status</th>
+                     <th scope="col">Option</th>
+                                    
+                </tr>
+            </thead>
+            {{#each order}}
+            <tbody>
+               
+                <tr>
+                  <td>{{this._id}}</td>
+                  {{!-- <td>{{this.products.item}}</td> --}}
+                   <td>{{this.date}}</td>
+                    <td>{{deliveryDetails.mobile}}</td>
+                     <td>{{this.payementMethod}}</td>
+                      <td>{{this.status}}</td>
+                      <td>
+                        <a class="btn btn-link" href="/admin/view-orderproduct/{{this._id}}">View</a>
+                      </td>
+                </tr>
+                
+            </tbody>
+            {{/each}}
+        </table>
+    </div>
+    </div>
+    {{!-- </div>
+    </div> --}}
+
+</section>
+{{!-- <script>
+    $(document).ready(function () {
+
+
+        $('#orderTable').wrap('<div id="hide" style="display:none"/>');
+
+        $('#hide').css('display', 'block');
+    });
+
+
+    var table = $('#orderTable').DataTable();
+</script> --}}
+
+

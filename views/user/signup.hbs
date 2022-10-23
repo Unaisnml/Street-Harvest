@@ -1,0 +1,86 @@
+<section class="vh-100" style="background-color: #f8f68e;">
+  <div class="container py-1 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card shadow-2-strong" style="border-radius: 1rem;">
+          <div class="card-body p-4 text-center">
+
+            <h3 class="mb-3">Create new Account</h3>
+            <form action="/userSignup" method="post">
+              <div class="form-outline mb-1">
+                <input
+                  type="text"
+                  id="typeEmailX-2"
+                  name="Name"
+                  class="form-control form-control-lg"
+                  placeholder="Your Name"
+                  required
+                />
+                <label class="form-label" for="typeEmailX-2"></label>
+              </div>
+              
+              <div class="form-outline mb-1">
+                <input
+                  type="email"
+                  id="typeEmailX-2"
+                  name="Email"
+                  class="form-control form-control-lg"
+                  placeholder="Email"
+                  required
+                />
+                <label class="form-label" for="typeEmailX-2"></label>
+              </div>
+
+              <div class="form-outline mb-1">
+                <input
+                  type="number"
+                  id="typeEmailX-2"
+                  name="Mobile"
+                  class="form-control form-control-lg"
+                  placeholder="Mobile Number"
+                  required
+                />
+                <label class="form-label" for="typeEmailX-2"></label>
+              </div>
+
+              <div class="form-outline mb-1">
+                <input
+                  type="password"
+                  id="typePasswordX-2"
+                  name="Password"
+                  class="form-control form-control-lg"
+                  placeholder="Password"
+                  required
+                />
+                <label class="form-label" for="typePasswordX-2"></label>
+              </div>
+
+              <button
+                class="btn btn-warning btn-lg btn-block"
+                type="submit"
+              >Signup</button>
+
+              <hr class="my-2" />
+              
+              <div>
+{{#if signupErr}}
+<p class="text-danger">Email Already Exist</p>
+{{/if}}
+              </div>
+              
+              <div
+                class="d-flex align-items-center justify-content-center pb-4"
+              >
+
+
+                <p class="mb-0 me-2">Already have an account?</p>
+                <a href="/userLogin" class="">Login</a>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
