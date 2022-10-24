@@ -453,9 +453,10 @@ try{
     res.redirect("/admin/view-banner");
   });
 
-} catch (error) {
-  next(error);
-}
+   } catch (error) {
+    next(error);
+  }
+  
 });
 
 module.exports = router;

@@ -39,6 +39,7 @@ module.exports = {
           .find()
           .toArray();
         resolve(catDetails);
+        console.log("category=",catDetails)
       } catch (error) {
         reject(error);
       }
