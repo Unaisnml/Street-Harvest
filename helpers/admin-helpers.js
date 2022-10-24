@@ -9,6 +9,9 @@ module.exports = {
     
     adminLogin: (adminData) => {
         return new Promise(async (resolve, reject) => {
+            try {
+                
+            
             let loginStatus = false
             let response = {}
             let admin = await db.get().collection(collection.ADMIN_COLLECTION).findOne({Email:adminData.Email})
@@ -25,18 +28,31 @@ module.exports = {
             }else{
                 resolve({ status: false})
             }
-        })
+        
+        } catch (error) {
+                
+        }
+    })
     },
 
     getAllUsers: () =>{
         return new Promise(async(resolve,reject) =>{
+            try {
+                
             let userdetails = await db.get().collection(collection.USER_COLLECTION).find().toArray()
             resolve(userdetails)
-        })
-     },
+        
+        } catch (error) {
+                
+    }}
+    )
+    },
 
     blockUser: (userId, userdetails) =>{
         return new Promise((resolve,reject)=>{
+            try {
+                
+            
             db.get().collection(collection.USER_COLLECTION).updateOne({_id:objectId(userId)}, {
                 $set:{
                     blocked:true
@@ -44,7 +60,9 @@ module.exports = {
             }).then((response)=>{
                 resolve()
             })
-        })
+        } catch (error) {
+                
+        }})
     },
     unblockUser: (userId, userDetails) =>{
         return new Promise ((resolve,reject)=>{

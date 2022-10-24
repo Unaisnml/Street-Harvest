@@ -82,19 +82,17 @@
                                         <span id="{{this.product._id}}">{{this.quantity}}</span>
                                         <button class="rounded-pill ml-3 btn-outline-info"
                                             onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../users}}',1)">+</button>
-                                        {{!-- <div class="pro-qty">
-                                            <input type="text" value="1">
-                                        </div> --}}
+                                        
                                     </td>
                                     
-                                    {{!-- <td class="cart__total">Total</td> --}}
+                                    
                                     <td>
                                    
                                     <button class="btn btn-danger"
                                         onclick="removeCartProduct('{{this._id}}','{{this.product._id}}')">Remove</button>
 
                                 </td>
-                                    {{!-- <td class="cart__close"><span class="icon_close"></span></td> --}}
+                                    
                                 </tr>
                                 {{/each}}
                             </tbody>
@@ -104,25 +102,13 @@
             </div>
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6">
-                    {{!-- <div class="cart__btn">
-                        <a href="#">Continue Shopping</a>
-                    </div> --}}
+                    
                 </div>
-                {{!-- <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="cart__btn update__btn">
-                        <a href="#"><span class="icon_loading"></span> Update cart</a>
-                    </div>
-                </div> --}}
+               
             </div>
             <div class="row">
                 <div class="col-lg-6">
-                    {{!-- <div class="discount__content">
-                        <h6>Discount codes</h6>
-                        <form action="#">
-                            <input type="text" placeholder="Enter your coupon code">
-                            <button type="submit" class="site-btn">Apply</button>
-                        </form>
-                    </div> --}}
+                   
                 </div>
                 <div class="col-lg-4 offset-lg-2">
                     <div class="cart__total__procced">
@@ -137,64 +123,7 @@
             </div>
         </div>
     </section>
-    <!-- Shop Cart Section End -->
-
-    {{!-- <!-- Instagram Begin -->
-    <div class="instagram">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="/user/assets/img/instagram/insta-1.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="/user/assets/img/instagram/insta-2.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="/user/assets/img/instagram/insta-3.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="/user/assets/img/instagram/insta-4.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="/user/assets/img/instagram/insta-5.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="/user/assets/img/instagram/insta-6.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Instagram End --> --}}
+    
 
     <!-- Footer Section Begin -->
     <footer class="footer">
@@ -305,8 +234,23 @@
             method: 'post',
             success: (response) => {
                 if (response.removeProduct) {
-                    alert("Product Removed from cart")
-                    location.reload()
+                   swal({
+  title: "Are you sure?",
+  
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
+})
+.then((willDelete) => {
+  if (willDelete) {
+    $("#cart-count").load(location.href+" #cart-count");
+     
+    location.reload()
+  } 
+  else {
+    swal("Your Item is safe!");
+  }
+});
                 } else {
                     document.getElementById(prodId).innerHTML = quantity + count
                     document.getElementById('total').innerHTML = response.total
@@ -316,6 +260,8 @@
     }
 </script>
 
+
+
 <script>
     function removeCartProduct(cartId,prodId){
             $.ajax({
@@ -323,9 +269,24 @@
                 method:'get',
                 success:(response)=>{
                     if(response.removeCartProduct){
-                        alert('Do you want to remove the product')
-                        location.reload()
-                        $("#cart-count").load(location.href+" #cart-count");
+                        swal({
+  title: "Are you sure?",
+  
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
+})
+.then((willDelete) => {
+  if (willDelete) {
+    $("#cart-count").load(location.href+" #cart-count");
+     
+    location.reload()
+  } 
+  else {
+    swal("Your Item is safe!");
+  }
+});
+                        
                     }
                 }
             })

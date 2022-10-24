@@ -9,7 +9,7 @@ function addToCart(prodId) {
           icon: 'success',
           title: 'Added to Cart',
           showConfirmButton: false,
-          timer: 1000
+          timer: 800
         })
         let count = $("#cart-count").html();
         count = parseInt(count) + 1;
@@ -33,7 +33,7 @@ function addtoWishList(prodId) {
           icon: 'success',
           title: 'Added to Wishlist',
           showConfirmButton: false,
-          timer: 1000
+          timer: 800
         })
         let count = $("#wishList-count").html();
         count = parseInt(count) + 1;

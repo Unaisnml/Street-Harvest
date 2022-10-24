@@ -4,7 +4,7 @@
   <meta name="keywords" content="Ashion, unica, creative, html" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>Ashion | Template</title>
+  <title></title>
 
   <!-- Google Font -->
   <link
@@ -81,7 +81,7 @@
           <a href="/">
             <img
               src="/product-images/logo.png"
-              style="height:3rem ;"
+              style="height:2rem ;"
               alt="logo"
             />
           </a>
@@ -89,9 +89,9 @@
         </div>
       </div>
       <div class="col-xl-6 col-lg-7">
-        <nav class="header__menu">
+        <nav class="header__menu ">
           <ul>
-            <li class="active"><a href="/">Home</a></li>
+            <li class=""><a href="/">Home</a></li>
             {{#each category}}
               <li class="" data-filter="*"><a
                   href="/category?category={{this.category}}"
@@ -131,7 +131,7 @@
             {{/if}}
           </div>
           <ul class="header__right__widget">
-            <li><span class="icon_search search-switch"></span></li>
+            {{!-- <li><span class="icon_search search-switch"></span></li> --}}
             {{#if users}}
               <li><a href="/wishList"><span class="icon_heart_alt"></span>
                   <div class="tip" id="whishlist-count">{{wishListCount}}</div>

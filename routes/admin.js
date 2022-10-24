@@ -8,7 +8,7 @@ const bannerHelpers = require("../helpers/banner-helpers");
 const router = express.Router();
 
 const verifyLogin = (req,res,next) =>{
-  if(req.session.loggedIn){
+  if(req.session.adminloggedIn){
     next()
   }else{
     res.redirect('/admin')
@@ -17,7 +17,7 @@ const verifyLogin = (req,res,next) =>{
 
 /* Admin Login*/
 router.get("/", (req, res, next)=> {
-  if (req.session.loggedIn) {
+  if (req.session.adminloggedIn) {
     res.redirect("/admin");
   } else {
     res.render("partials/admin-login", {
@@ -31,7 +31,7 @@ router.get("/", (req, res, next)=> {
 router.post("/", (req, res, next) => {
   adminHelpers.adminLogin(req.body).then(async (response) => {
     if (response.status) {
-      req.session.loggedIn = true;
+      req.session.adminloggedIn = true;
       req.session.admin = response.admin;
       let admin = req.session.admin;
       let userCount = await userHelpers.getUserCount();
@@ -62,8 +62,8 @@ router.post("/", (req, res, next) => {
 
 /* Admin Logout*/
 router.get("/adminLogout", (req, res, next)=> {
-  req.session.loggedIn = null;
-  req.session.loggedIn = false;
+  req.session.adminloggedIn = null;
+  req.session.adminloggedIn = false;
   req.session.admin = null;
   res.redirect("/admin");
 });
