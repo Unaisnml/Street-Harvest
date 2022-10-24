@@ -30,8 +30,8 @@ module.exports = {
             }
         
         } catch (error) {
-                
-        }
+            reject(error)
+          }
     })
     },
 
@@ -43,8 +43,8 @@ module.exports = {
             resolve(userdetails)
         
         } catch (error) {
-                
-    }}
+            reject(error)
+          }}
     )
     },
 
@@ -61,11 +61,12 @@ module.exports = {
                 resolve()
             })
         } catch (error) {
-                
-        }})
+            reject(error)
+          }})
     },
     unblockUser: (userId, userDetails) =>{
         return new Promise ((resolve,reject)=>{
+            try{
             db.get().collection(collection.USER_COLLECTION).updateOne({_id:objectId(userId)}, {
                 $set:{
                     blocked:false
@@ -73,6 +74,9 @@ module.exports = {
             }).then((response)=>{
                 resolve()
             })
+        } catch (error) {
+            reject(error)
+          }
         })
     },
 
@@ -101,11 +105,15 @@ module.exports = {
 
     deleteCoupon:(couponId)=>{
         return new Promise ((resolve,reject)=>{
+            try{
             db.get().collection(collection.COUPON_COLLECTION)
             .deleteOne({_id:objectId(couponId)}).then((response)=>{
                 resolve(response)
             })
-        })
+        
+        } catch (error) {
+            reject(error)
+          }})
     },
 
     viewCoupon: () => {
@@ -119,7 +127,7 @@ module.exports = {
                 resolve(viewCoupon);
             
         } catch (error) {
-            
+            reject(error)
         }
       })
       },

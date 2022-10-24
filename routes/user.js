@@ -19,6 +19,8 @@ const verifyLogin = (req, res, next) => {
 
 /* GET home page. */
 router.get("/", async (req, res, next) => {
+try{
+
   let cartCount = null;
   let wishListCount = null;
   let banner = null;
@@ -48,10 +50,16 @@ router.get("/", async (req, res, next) => {
     console.log("12323 =", category);
     res.render("user/user-home", { category, products,banner, user: true });
   }
+
+} catch (error) {
+  next(error);
+}
 });
 
 /* USER Signup. */
 router.get("/userSignup", async (req, res, next) => {
+try{
+
   category = await categoryHelpers.getAllCategory();
   if (req.session.loggedIn) {
     res.redirect("/");
@@ -59,10 +67,20 @@ router.get("/userSignup", async (req, res, next) => {
     res.render("user/signup", {signupErr:req.session.signupErr, user: true, category });
     req.session.signupErr=false;
   }
+} catch (error) {
+  next(error);
+}
+
 });
 
 router.get("/otp", async (req, res) => {
+
+  try{
   res.render("user/otp", { user: true, loginErr: req.session.loginErr });
+} catch (error) {
+  next(error);
+}
+
 });
 
 router.post("/userSignup", (req, res) => {
@@ -111,6 +129,8 @@ router.post("/otp", (req, res, next) => {
 
 /* USER Login. */
 router.get("/userLogin", async (req, res, next) => {
+try{
+
   category = await categoryHelpers.getAllCategory();
   if (req.session.loggedIn) {
     let users = req.session.user;
@@ -119,9 +139,15 @@ router.get("/userLogin", async (req, res, next) => {
     res.render("user/login", {loginerr:req.session.loginerr, user: true, category });
     req.session.loginerr=false
   }
+
+} catch (error) {
+  next(error);
+}
 }); 
 
 router.post("/userLogin", function (req, res) {
+
+  try{
   userHelpers.doLogin(req.body).then((response) => {
     if (response.status) {
       req.session.loggedIn = true;
@@ -132,18 +158,29 @@ router.post("/userLogin", function (req, res) {
       res.redirect("/userLogin");
     }
   });
+} catch (error) {
+  next(error);
+}
 });
 
 /* USER Logout. */
 router.get("/userLogout", function (req, res, next) {
+
+  try{
   req.session.loggedIn = null;
   req.session.loggedIn = false;
   req.session.user = null;
   res.redirect("/");
+
+} catch (error) {
+  next(error);
+}
 });
 
 /* Category Product View. */
 router.get("/category", async (req, res) => {
+
+  try{
   let catagory = req.query.category;
   let cartCount = null;
   let wishCount = null;
@@ -165,10 +202,16 @@ router.get("/category", async (req, res) => {
     wishCount,
     cartCount,
   });
+} catch (error) {
+  next(error);
+}
+
 });
 
 /* Single Product View. */
 router.get("/single-product/:id", async (req, res,next) => {
+try{
+
   let prodId = req.params.id;
   let cartCount = null;
   let wishCount = null;
@@ -189,19 +232,31 @@ router.get("/single-product/:id", async (req, res,next) => {
     category,
     user: true,
   });
+
+} catch (error) {
+  next(error);
+}
 });
 
 /* USER Add to WishList. */
 router.get("/add-to-wishList/:id", verifyLogin, (req, res, next) => {
+
+  try{
   let prodId = req.params.id;
   let userId = req.session.user._id;
   userHelpers.addtoWishList(prodId, userId).then(() => {
     res.json({ status: true });
   });
+
+} catch (error) {
+  next(error);
+}
 });
 
 /* USER View WhishList. */
 router.get("/wishList", verifyLogin, async (req, res) => {
+
+  try{
   let users = req.session.user;
   let wishListCount = null;
   let cartCount = null;
@@ -219,28 +274,44 @@ router.get("/wishList", verifyLogin, async (req, res) => {
     category,
     user: true,
   });
+} catch (error) {
+  next(error);
+}
 });
 
 /* USER Remove WhishList. */
 router.get("/delete-wishItem/:wishId/:prodId",verifyLogin, (req, res,next) => {
+
+  try{
   let wishId = req.params.wishId;
   let prodId = req.params.prodId;
   userHelpers.deleteWishItem(wishId, prodId).then((response) => {
     res.json(response);
   });
+
+} catch (error) {
+  next(error);
+}
 });
 
 /* USER Add to Cart. */
 router.get("/add-to-cart/:id", verifyLogin, (req, res,next) => {
+  try{
   let prodId = req.params.id;
   let userId = req.session.user._id;
   userHelpers.addToCart(prodId, userId).then(() => {
     res.json({ status: true });
   });
+
+} catch (error) {
+  next(error);
+}
 });
 
 /* USER View Cart. */
 router.get("/cart", verifyLogin, async (req, res, next) => {
+  try{
+
   let wishListCount = null;
   let cartCount = null;
   let category = await categoryHelpers.getAllCategory();
@@ -261,28 +332,44 @@ router.get("/cart", verifyLogin, async (req, res, next) => {
     category,
     user: true,
   });
+
+} catch (error) {
+  next(error);
+}
 });
 
 /* Change Product quantiry. */
 router.post("/change-product-quantity", verifyLogin, (req, res, next) => {
+  try{
+
   let userId = req.session.user._id;
   userHelpers.changeProductQuantity(req.body).then(async (response) => {
     response.total = await userHelpers.getTotalAmount(userId);
     res.json(response);
   });
+
+} catch (error) {
+  next(error);
+}
 });
 
 /* Change Delete-cartItem. */
 router.get("/delete-cartItem/:cartId/:prodId", verifyLogin, (req, res, next) => {
+  try{
+
   let cartId = req.params.cartId;
   let prodId = req.params.prodId;
   userHelpers.deleteCartItem(cartId, prodId).then((response) => {
     res.json(response);
   });
+} catch (error) {
+  next(error);
+}
 });
 
 /* Checkout */
 router.get("/checkout", verifyLogin, async (req, res,next) => {
+try{
   let addressId = req.query.id;
   let userId = req.session.user._id;
   let users = req.session.user;
@@ -303,9 +390,15 @@ router.get("/checkout", verifyLogin, async (req, res,next) => {
     viewCoupon,
     user: true,
   });
+
+} catch (error) {
+  next(error);
+}
 });
 
 router.post("/checkout", verifyLogin, async (req, res, next) => {
+  try{
+
   let products = await userHelpers.getCartProductList(req.body.userId);
   let totalPrice = await userHelpers.getTotalAmount(req.body.userId);
   userHelpers.checkOut(req.body, products, totalPrice).then((orderId) => {
@@ -317,6 +410,10 @@ router.post("/checkout", verifyLogin, async (req, res, next) => {
       });
     }
   });
+
+} catch (error) {
+  next(error);
+}
 });
 
 /*Apply Coupon */
@@ -339,6 +436,8 @@ router.post("/apply-coupon", verifyLogin, async (req, res, next) => {
 
 /* Verify Payement */
 router.post("/verify-payment", verifyLogin, (req, res, next) => {
+try{
+
   console.log(req.body);
   userHelpers
     .verifyPayment(req.body)
@@ -352,16 +451,27 @@ router.post("/verify-payment", verifyLogin, (req, res, next) => {
       console.log(err);
       res.json({ status: false, errMsg: "" });
     });
+  } catch (error) {
+    next(error);
+  }
 });
 
 /* Order Success */
 router.get("/order-success", verifyLogin, (req, res, next) => {
+  try{
+
   let users = req.session.user;
   res.render("user/order-success", { users, user: true });
+
+} catch (error) {
+  next(error);
+}
 });
 
 /* View Orders */
 router.get("/orders", verifyLogin, async (req, res,next) => {
+try{
+
   let orders = await userHelpers.getUserOrders(req.session.user._id);
   let cartCount = await userHelpers.getCartCount(req.session.user._id);
   let wishListCount = await userHelpers.getWishListCount(req.session.user._id);
@@ -373,10 +483,16 @@ router.get("/orders", verifyLogin, async (req, res,next) => {
     orders,
     user: true,
   });
+
+} catch (error) {
+  next(error);
+}
 });
 
 /* View order Single Product */
 router.get("/view-order-products/:id", verifyLogin, async (req, res, next) => {
+  try{
+
   let users = req.session.user;
   let products = await userHelpers.getOrderProduct(req.params.id);
   let orders = await userHelpers.getUserOrders(req.session.user._id);
@@ -392,6 +508,10 @@ router.get("/view-order-products/:id", verifyLogin, async (req, res, next) => {
     cartCount,
     value,
   });
+
+} catch (error) {
+  next(error);
+}
 });
 
 /* Cancel Item */
@@ -501,17 +621,27 @@ router.post("/change-password", verifyLogin, async (req, res, next) => {
 
 /* Contact */
 router.get("/contact", async (req, res, next) => {
+  try{
   let category = null;
   category = await categoryHelpers.getAllCategory();
   res.render("user/contact", { user: true, category });
+
+} catch (error) {
+  next(error);
+}
 });
 
 /* Banner Item */
 router.get('/shop-now', async(req,res,next)=>{
+  try{
   let products = await productHelpers.getAllProducts();
   let category = await categoryHelpers.getAllCategory();
   
   res.render('user/banner-item', {user:true,products,category})
+
+} catch (error) {
+  next(error);
+}
 })
 
 

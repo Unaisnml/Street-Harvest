@@ -9,6 +9,7 @@ module.exports = {
     doSms: (userData) => {
         console.log(userData.Mobile);
         return new Promise(async (resolve, reject) => {
+            try{
             let res = {}
             await client.verify.services(serviceID).verifications.create({
                 to: `+91${userData.Mobile}`,
@@ -19,10 +20,14 @@ module.exports = {
             }).catch((err) => {
                 console.log(err);
             })
+        } catch (error) {
+            reject(error);
+          }
         })
     },
     otpVerify: (otpData, userData) => {
         return new Promise(async(resolve, reject) => {
+            try{
             await client
                 .verify
                 .services(serviceID)
@@ -33,6 +38,9 @@ module.exports = {
                 }).then((verifications) => {
                         resolve(verifications.valid)
                     })
+                } catch (error) {
+                    reject(error);
+                  }
     })
 }
 

@@ -5,6 +5,9 @@ const { response } = require("../app");
 
 module.exports = {
   addProduct: (product, callback) => {
+
+try{
+
     product.deleted = false;
     console.log(product);
     db.get()
@@ -13,32 +16,55 @@ module.exports = {
       .then((data) => {
         callback(data.insertedId);
       });
+
+    } catch (error) {
+      reject(error)
+    }
+
   },
 
   getAllProducts: () => {
     return new Promise(async (resolve, reject) => {
+try{
+
       let products = await db
         .get()
         .collection(collection.PRODUCT_COLLECTION)
         .find({deleted:false})
         .toArray();
       resolve(products);
+
+    } catch (error) {
+      reject(error)
+    }
+
     });
   },
 
   getProductDetails: (prodId) => {
     return new Promise((resolve, reject) => {
+
+try{
+
       db.get()
         .collection(collection.PRODUCT_COLLECTION)
         .findOne({ _id: objectId(prodId) })
         .then((products) => {
           resolve(products);
         });
+
+      } catch (error) {
+        reject(error)
+      }
+
     });
   },
 
   updateProduct: (prodId, prodetails) => {
     return new Promise((resolve, reject) => {
+
+try{
+
       db.get()
         .collection(collection.PRODUCT_COLLECTION)
         .updateOne(
@@ -55,11 +81,19 @@ module.exports = {
         .then((response) => {
           resolve();
         });
+
+      } catch (error) {
+        reject(error)
+      }
+
     });
   },
 
   deleteProduct: (prodId) => {
     return new Promise((resolve, reject) => {
+
+try{
+
       db.get()
         .collection(collection.PRODUCT_COLLECTION)
         .updateOne(
@@ -73,19 +107,31 @@ module.exports = {
         .then((response) => {
           resolve(response);
         });
+
+      } catch (error) {
+        reject(error)
+      }
+
     });
   },
 
   categoryProducts: (data) => {
-    console.log(data, "ddddd");
     return new Promise(async (resolve, reject) => {
+
+      try{
+
       let products = await db
         .get()
         .collection(collection.PRODUCT_COLLECTION)
-        .find({ Category: data })
+        .find({ Category: data, deleted:false })
         .toArray();
       console.log(products, "dd");
       resolve(products);
+
+    } catch (error) {
+      reject(error)
+    }
+
     });
   },
 };

@@ -72,6 +72,38 @@
 
 </head>
 
+<!-- Offcanvas Menu Begin -->
+    <div class="offcanvas-menu-overlay"></div>
+    <div class="offcanvas-menu-wrapper">
+        <div class="offcanvas__close">+</div>
+        <ul class="offcanvas__widget">
+            {{#if users}}
+            
+            <li><a href="/wishList"><span class="icon_heart_alt"></span>
+                    <div class="tip">{{wishListCount}}</div>
+                </a></li>
+            <li><a href="/cart"><span class="icon_bag_alt"></span>
+                    <div class="tip">{{cartCount}}</div>
+                </a></li>
+                {{/if}}
+        </ul>
+        <div class="offcanvas__logo">
+            <a href=""><img src="" alt=""></a>
+        </div>
+        <div id="mobile-menu-wrap"></div>
+        <div class="offcanvas__auth">
+{{#if users}}
+ <a class="color-primary" href="/userLogout">Logout</a>
+ {{else}}
+            <a class="color-primary" href="/userLogin">Login</a>
+            {{/if}}
+            {{!-- <a href="#">Register</a> --}}
+        </div>
+    </div>
+    <!-- Offcanvas Menu End -->
+
+
+
 <!-- Header Section Begin -->
 <header class="header">
   <div class="container-fluid">
