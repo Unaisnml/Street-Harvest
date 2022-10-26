@@ -5,7 +5,7 @@ function addToCart(prodId) {
     success: (response) => {
       if (response.status) {
         Swal.fire({
-          position: 'top-end',
+          
           icon: 'success',
           title: 'Added to Cart',
           showConfirmButton: false,
@@ -29,15 +29,15 @@ function addtoWishList(prodId) {
     success: (response) => {
       if (response.status) {
         Swal.fire({
-          position: 'top-end',
+          
           icon: 'success',
           title: 'Added to Wishlist',
           showConfirmButton: false,
           timer: 800
         })
-        let count = $("#wishList-count").html();
+        let count = $("#whishlist-count").html();
         count = parseInt(count) + 1;
-        $("#wishList-count").html(count);
+        $("#whishlist-count").html(count);
       } else {
         location.href = "/userLogin";
       }

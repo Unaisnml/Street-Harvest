@@ -19,24 +19,36 @@
 </section>
 
 <section>
-  <div class="mt-5 "></div>
-  {{#each products}}
-<div class="card ml-5 mt-5" style="width: 18rem;">
-  <img src="product-images/{{this._id}}.jpg" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h4 class="card-title">{{this.Name}}</h4>
-    <p class="card-text font-weight-bold">₹ {{this.Price}}</p>
-    <div class="d-flex justify-content-between">
-      
-      <button onclick="addtoWishList('{{this._id}}')" class="btn btn-warning ">Add Wishlist</button></li>
-                                <button onclick="addToCart('{{this._id}}')" class="btn btn-success">Add to
-                                    Cart</button>
-      {{!-- <a href="#" class="btn btn-primary btn-sm">Add to Cart</a>
-    <a href="#" class="btn btn-primary btn-sm">Add to Wishlist</a> --}}
+    <div class="container-fluid ">
+        <div class="row">
+            {{#each products }}
+
+            <div class="col-md-3 p-3 d-flex justify-content-around">
+                <div class="card mt-4 " style="width: 20rem; height:25rem">
+                    <a href="/single-product/{{this._id}}">
+                        <img src="product-images/{{this._id}}.jpg" class="card-img-top" alt="..." style="height: 14rem;">
+
+                    </a>
+
+                    <div class="card-body">
+                        <h5 class="card-title">{{this.Name}}</h5>
+                        <p class="card-text">₹ {{this.Price}}</p>
+                        <p class="card-text">{{this.Description}}</p>
+
+                        {{!-- <i class="fas fa-camera fa-9x"></i> --}}
+                        <button onclick="addtoWishList('{{this._id}}')" class=" bi-cart-fill btn btn-warning"
+                         style="font-size: 10px">Add Wishlist</button>
+                        <button onclick="addToCart('{{this._id}}')" class=" bi-cart-fill btn btn-success"
+                            style='font-size:10px '> Add to Cart</button>
+
+
+                    </div>
+                </div>
+            </div>
+
+            {{/each}}
+        </div>
     </div>
-  </div>
-</div>
-{{/each}}
 </section>
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -49,7 +61,7 @@
     success: (response) => {
       if (response.status) {
         Swal.fire({
-          position: 'top-end',
+          
           icon: 'success',
           title: 'Added to Cart',
           showConfirmButton: false,
@@ -73,15 +85,15 @@ function addtoWishList(prodId) {
     success: (response) => {
       if (response.status) {
         Swal.fire({
-          position: 'top-end',
+         
           icon: 'success',
           title: 'Added to Wishlist',
           showConfirmButton: false,
           timer: 800
         })
-        let count = $("#wishList-count").html();
+        let count = $("#whishlist-count").html();
         count = parseInt(count) + 1;
-        $("#wishList-count").html(count);
+        $("#whishlist-count").html(count);
       } else {
         location.href = "/userLogin";
       }

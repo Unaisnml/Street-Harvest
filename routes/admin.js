@@ -287,7 +287,7 @@ router.get("/coupon", async (req, res, next) => {
   }
 });
 
-router.post("/coupon", async (req, res, next) => {
+router.post("/add-coupon", async (req, res, next) => {
   try {
     await adminHelpers.addCoupon(req.body);
     res.redirect("/admin/coupon");
