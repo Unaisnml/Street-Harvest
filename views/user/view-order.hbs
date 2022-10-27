@@ -82,6 +82,11 @@
                 
                 {{else}}
                 <a class="btn btn-danger mb-5 ml-5" href="/item-cancelled/{{this.id}}" role="button">Cancel Order</a>
+
+                {{#if cancelled}}
+                <a class="btn btn-primary mb-5 ml-5" href="/" role="button">Buy again</a>
+
+{{/if}}
                 {{/if}}
 
                 {{/with}}

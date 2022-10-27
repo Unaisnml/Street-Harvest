@@ -369,6 +369,8 @@ router.get("/checkout", verifyLogin, async (req, res, next) => {
     let viewCoupon = await adminHelpers.viewCoupon();
     let selectAddress = await userHelpers.placeAddress(addressId, userId);
     let userAddress = await userHelpers.userAddress(req.session.user._id);
+    let cartCount = await userHelpers.getCartCount(req.session.user._id);
+    let wishListCount = await userHelpers.getWishListCount(req.session.user._id);
     res.render("user/checkout", {
       users,
       total,
@@ -378,6 +380,8 @@ router.get("/checkout", verifyLogin, async (req, res, next) => {
       userId,
       userAddress,
       viewCoupon,
+      cartCount,
+      wishListCount,
       user: true,
     });
   } catch (error) {
@@ -443,10 +447,19 @@ router.post("/verify-payment", verifyLogin, (req, res, next) => {
 });
 
 /* Order Success */
-router.get("/order-success", verifyLogin, (req, res, next) => {
+router.get("/order-success", verifyLogin, async (req, res, next) => {
   try {
     let users = req.session.user;
-    res.render("user/order-success", { users, user: true });
+    let cartCount = await userHelpers.getCartCount(req.session.user._id);
+    let wishListCount = await userHelpers.getWishListCount(
+      req.session.user._id
+    );
+    res.render("user/order-success", {
+      users,
+      cartCount,
+      wishListCount,
+      user: true,
+    });
   } catch (error) {
     next(error);
   }

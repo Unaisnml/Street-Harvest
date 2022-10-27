@@ -19,6 +19,7 @@ module.exports = {
         if (categoryExist) {
           resolve({ exist: true });
         } else {
+          catData.deleted = false;
           db.get()
             .collection(collection.CATEGORY_COLLECTION)
             .insertOne(catData);
@@ -36,7 +37,7 @@ module.exports = {
         let catDetails = await db
           .get()
           .collection(collection.CATEGORY_COLLECTION)
-          .find()
+          .find({deleted:false})
           .toArray();
         resolve(catDetails);
         console.log("category=",catDetails)
@@ -52,7 +53,7 @@ module.exports = {
         let ShowingCatagory = await db
           .get()
           .collection(collection.CATEGORY_COLLECTION)
-          .find()
+          .find({deleted:false})
           .toArray();
         resolve(ShowingCatagory);
       } catch (error) {
@@ -66,7 +67,14 @@ module.exports = {
       try {
         db.get()
           .collection(collection.CATEGORY_COLLECTION)
-          .deleteOne({ _id: objectId(catId) })
+          .updateOne(
+            { _id: objectId(catId) },
+            {
+              $set: {
+                deleted: true,
+              },
+            }
+          )
           .then((response) => {
             resolve(response);
           });

@@ -88,17 +88,6 @@ try{
 }
 });
 
-/* Admin Dashboard Management. */
-router.get("/dash-board", (req, res,next) => {
-
-try{
-
-  res.redirect("/admin");
-
-} catch (error) {
-  next(error);
-}
-});
 
 /* Admin User Management. */
 router.get("/manage-users",  (req, res, next) =>{
@@ -458,5 +447,21 @@ try{
   }
   
 });
+
+router.use(function (req, res, next) {
+  next(createError(404));
+});
+
+// error handler
+router.use(function (err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get("env") === "development" ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  res.render("admin/error", {admin:true});
+});
+
 
 module.exports = router;

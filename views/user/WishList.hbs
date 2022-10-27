@@ -32,15 +32,24 @@
 </section>
 
 <script>
-  function addToCart(prodId) {
+
+function addToCart(prodId) {
   $.ajax({
     url: "/add-to-cart/" + prodId,
-    method:"get",
+    method: "get",
     success: (response) => {
       if (response.status) {
+        Swal.fire({
+          
+          icon: 'success',
+          title: 'Added to Cart',
+          showConfirmButton: false,
+          timer: 800
+        })
         let count = $("#cart-count").html();
         count = parseInt(count) + 1;
         $("#cart-count").html(count);
+
       } else {
         location.href = "/userLogin";
       }

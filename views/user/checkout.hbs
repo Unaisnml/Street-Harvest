@@ -35,37 +35,37 @@
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="checkout__form__input">
                                     <p>NAME<span>*</span></p>
-                                    <input type="text" id="name" name="name" value="{{selectAddress.name}}">
+                                    <input type="text" id="name" name="name" value="{{selectAddress.name}}" required>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="checkout__form__input">
                                     <p>EMAIL<span>*</span></p>
-                                    <input type="email" id="email" name="email" value="{{selectAddress.email}}">
+                                    <input type="email" id="email" name="email" value="{{selectAddress.email}}" required>
                                 </div>                               
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="checkout__form__input">
                                     <p>MOBILE<span>*</span></p>
-                                    <input type="number" id="mobile" name="mobile" value="{{selectAddress.mobile}}">
+                                    <input type="number" id="mobile" name="mobile" value="{{selectAddress.mobile}}" required>
                                 </div>                               
                             </div>
                             <div class="col-lg-12">
                                  <div class="checkout__form__input">
                                     <p>ADDRESS<span>*</span></p>
-                                    <input type="text" id="address" name="address" value="{{selectAddress.address}}">
+                                    <input type="text" id="address" name="address" value="{{selectAddress.address}}" required>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="checkout__form__input">
                                     <p>TOWN/CITY<span>*</span></p>
-                                    <input type="text" id="town" name="town" value="{{selectAddress.town}}">
+                                    <input type="text" id="town" name="town" value="{{selectAddress.town}}" required>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="checkout__form__input">
                                     <p>DISTRICT <span>*</span></p>
-                                    <input type="text" id="district" name="district" value="{{selectAddress.district}}">
+                                    <input type="text" id="district" name="district" value="{{selectAddress.district}}" required>
                                     <input type="text" name="userId" id="userId" value="{{users._id}}" hidden>
                                     <input type="text" name="discount" id="offer" value="0" hidden>
                         <input type="text" name="grandTotal" id="finalprice" value="{{total}}" hidden>
@@ -74,14 +74,14 @@
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="checkout__form__input">
                                     <p>STATE<span>*</span></p>
-                                    <input type="text" id="state" name="state" value="{{selectAddress.state}}">
+                                    <input type="text" id="state" name="state" value="{{selectAddress.state}}" required>
                                 </div>
                                 
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="checkout__form__input">
                                     <p>PINCODE<span>*</span></p>
-                                    <input type="number" id="pincode" name="pincode" value="{{selectAddress.pincode}}">
+                                    <input type="number" id="pincode" name="pincode" value="{{selectAddress.pincode}}" required>
                                 </div>
                                 
                             </div>
@@ -94,21 +94,21 @@
                                 <ul>                  
                             <li><a href="#">Product <span>Total</span></a></li>
                                 {{#each products}}
-                                <li><a href="#">{{this.product.Name}} <span class="middle">x {{this.quantity}}</span>
+                                <li><a href="#">{{product.Name}} <span class="middle">x {{this.quantity}}</span>
                                         <span class="last">{{this.product.Price}}</span></a></li>
                                 {{/each}}
                         </ul>
                         </div>
                         <div class="checkout_order_total">
-                        <ul>
-                            <li>Subtotal <span id="subTotal">{{total}}</span></li> 
-                            <li><a href="#">Discount <span id="discount"></span></a></li>
-                            <li>Total <span id="grandTotal">{{total}}</span></li>
+                        <ul class="list-group">
+                            <li class="list-group-item" >Subtotal: <span id="subTotal">{{total}}</span></li> 
+                            <li class="list-group-item"><a>Discount: <span id="discount"></span></a></li>
+                            <li class="list-group-item">Total: <span id="grandTotal">{{total}}</span></li>
                         </ul>
                     </div>
                                 
                             
-                            <div class="checkout__order__widget">
+                            <div class="checkout__order__widget" >
                                 <div class="my-4">
                                     <h6>Choose Payment Method </h6>
                                 </div>
