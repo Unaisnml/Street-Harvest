@@ -14,7 +14,7 @@ module.exports = {
         let categoryExist = await db
           .get()
           .collection(collection.CATEGORY_COLLECTION)
-          .findOne({ category: catData.category });
+          .findOne( {category: catData.category}, {deleted:false });
 
         if (categoryExist) {
           resolve({ exist: true });
