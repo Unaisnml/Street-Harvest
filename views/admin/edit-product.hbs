@@ -1,43 +1,77 @@
 <section>
-    <div class="pcoded-content">
-        <div class=" container row">
-            <div class="ml-5 col-md-6">
-                <h2 class="text-center mt-5">Edit Product</h2>
-                <form action="/admin/edit-product/{{product._id}}" method="post" enctype="multipart/form-data">
-                    <label for="">Name</label>
-                    <input type="text" name="Name" class="form-control" value="{{product.Name}}">
-                    
-                    
-                    <label for="">Description</label>
-                    <input type="text" name="Description" class="form-control" value="{{product.Description}}">
+  <div class="pcoded-content">
+    <div class="container row">
+      <div class="ml-5 col-md-6">
+        <h2 class="text-center mt-5">Edit Product</h2>
+        <form
+          action="/admin/edit-product/{{product._id}}"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          <label for="">Name</label>
+          <input
+            type="text"
+            name="Name"
+            class="form-control"
+            value="{{product.Name}}"
+          />
 
-                    <label for="">Price</label>
-                    <input type="Number" name="Price" class="form-control" value="{{product.Price}}">
+          <label for="">Description</label>
+          <input
+            type="text"
+            name="Description"
+            class="form-control"
+            value="{{product.Description}}"
+          />
 
-                    <label for="cars">Category:</label><br />
+          <label for="">Price</label>
+          <input
+            type="Number"
+            name="Price"
+            class="form-control"
+            value="{{product.Price}}"
+          />
 
-          <select class="form-select"  style="width:520px; height: 30px;" name="Category" id="#">
+          <label for="cars">Category:</label><br />
+
+          <select
+            class="form-select"
+            style="width:520px; height: 30px;"
+            name="Category"
+            id="#"
+          >
             <option value="volvo">Choose Category</option>
             {{#each categorydetails}}
               <option value="{{this.category}}">{{this.category}}</option>
             {{/each}}
           </select><br /><br />
 
-                    <label for="">Image</label>
-                    <img src="/product-images/{{product._id}}.jpg" alt="" style="width:100px; height: 110px;" id="imgView" class="pt-3">
-                    
-                    <input type="file" name="Image" class="form-control" onchange="viewImage(event)">
+          <label for="">Image</label>
+          <img
+            src="/product-images/{{product._id}}.jpg"
+            alt=""
+            style="width:100px; height: 110px;"
+            id="imgView"
+            class="pt-3"
+          />
 
-                    <button type="submit" class="btn btn-success mt-4">Submit</button>
+          <input
+            type="file"
+            name="Image"
+            class="form-control"
+            onchange="viewImage(event)"
+          />
 
-                </form>
-            </div>
-        </div>
+          <button type="submit" class="btn btn-success mt-4">Submit</button>
+
+        </form>
+      </div>
     </div>
+  </div>
 </section>
 
 <script>
-    function viewImage(event){
-        document.getElementById('imgView').src=URL.createObjectURL(event.target.files[0])
-    }
+  function viewImage(event){
+  document.getElementById('imgView').src=URL.createObjectURL(event.target.files[0])
+  }
 </script>

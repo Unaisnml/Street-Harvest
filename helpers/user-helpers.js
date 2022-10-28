@@ -1,13 +1,13 @@
-let db = require("../config/connection");
-let collection = require("../config/collections");
+const db = require("../config/connection");
+const collection = require("../config/collections");
 const bcrypt = require("bcrypt");
 const { response } = require("express");
-let objectId = require("mongodb").ObjectId;
+const objectId = require("mongodb").ObjectId;
 const Razorpay = require("razorpay");
 const { resolve } = require("path");
-var instance = new Razorpay({
-  key_id: "rzp_test_WHDWrOcFGOoWv2",
-  key_secret: "n3cB52QmfcVasQQssvsTWPBb",
+let instance = new Razorpay({
+  key_id: process.env.key_id,
+  key_secret: process.env.key_secret,
 });
 
 module.exports = {
@@ -167,7 +167,6 @@ module.exports = {
   },
 
   getWishListProducts: (userId) => {
-    console.log(userId);
     return new Promise(async (resolve, reject) => {
       try {
         let wishListItems = await db
@@ -203,8 +202,6 @@ module.exports = {
             },
           ])
           .toArray();
-        console.log("wishlistitemmmmmmmmmm");
-        console.log(wishListItems);
         resolve(wishListItems);
       } catch (error) {
         reject(error);
@@ -265,7 +262,6 @@ module.exports = {
           let proExist = userCart.products.findIndex(
             (product) => product.item == prodId
           );
-          console.log(proExist);
           if (proExist != -1) {
             db.get()
               .collection(collection.CART_COLLECTION)
@@ -310,7 +306,6 @@ module.exports = {
   },
 
   getCartProducts: (userId) => {
-    console.log('id',userId);
     return new Promise(async (resolve, reject) => {
       try {
         let cartItems = await db
@@ -346,8 +341,6 @@ module.exports = {
             },
           ])
           .toArray();
-        console.log("cartiitttemmm");
-        console.log(cartItems);
         resolve(cartItems);
       } catch (error) {
         reject(error);
@@ -374,10 +367,8 @@ module.exports = {
   },
 
   changeProductQuantity: (details) => {
-    console.log(details,'hiii');
     details.count = parseInt(details.count);
     details.quantity = parseInt(details.quantity);
-    console.log(details.count);
     return new Promise((resolve, reject) => {
       try {
         if (details.count == -1 && details.quantity == 1) {
@@ -494,7 +485,6 @@ module.exports = {
   checkOut: (order, products, total) => {
     return new Promise((resolve, reject) => {
       try {
-        console.log("jjjjjjjjjjj",order, products, total);
         let status = order["payement-method"] == "COD" ? "placed" : "pending";
         let orderObj = {
           deliveryDetails: {
@@ -507,7 +497,7 @@ module.exports = {
           products: products,
           totalAmount: total,
           status: status,
-          date: new Date()
+          date: new Date(),
         };
 
         db.get()
@@ -517,7 +507,6 @@ module.exports = {
             db.get()
               .collection(collection.CART_COLLECTION)
               .deleteOne({ user: objectId(order.userId) });
-            console.log("hello" + response.insertedId);
             resolve(response.insertedId);
           });
       } catch (error) {
@@ -543,14 +532,12 @@ module.exports = {
   getUserOrders: (userId) => {
     return new Promise(async (resolve, reject) => {
       try {
-        console.log(userId);
         let orders = await db
           .get()
           .collection(collection.ORDER_COLLECTION)
           .find({ userId: objectId(userId) })
           .sort({ date: -1 })
           .toArray();
-        console.log(orders);
         resolve(orders);
       } catch (error) {
         reject(error);
@@ -764,7 +751,6 @@ module.exports = {
           if (err) {
             console.log(err);
           } else {
-            console.log("new order:", order);
             resolve(order);
           }
         });
@@ -988,6 +974,7 @@ module.exports = {
       }
     });
   },
+
   updateAddress: (address, addressId, userId) => {
     return new Promise(async (resolve, reject) => {
       try {
@@ -1088,7 +1075,6 @@ module.exports = {
           ])
           .toArray();
         resolve(address[0]);
-        console.log(address[0]);
       } catch (error) {
         reject(error);
       }
@@ -1103,8 +1089,6 @@ module.exports = {
           .get()
           .collection(collection.ORDER_COLLECTION)
           .findOne({ _id: objectId(orderId) });
-        console.log(order);
-        console.log(order._id);
         if (order) {
           if (order.value) {
             response.status = true;

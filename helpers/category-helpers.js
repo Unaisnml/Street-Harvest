@@ -1,20 +1,19 @@
-let db = require("../config/connection");
-let collection = require("../config/collections");
+const db = require("../config/connection");
+const collection = require("../config/collections");
 const { response } = require("../app");
 const { upperCase } = require("upper-case");
-let objectId = require("mongodb").ObjectId;
+const objectId = require("mongodb").ObjectId;
 
 module.exports = {
   addCategory: (catData) => {
     return new Promise(async (resolve, reject) => {
       try {
-        console.log("catData");
         catData.category = catData.category.toUpperCase();
 
         let categoryExist = await db
           .get()
           .collection(collection.CATEGORY_COLLECTION)
-          .findOne( {category: catData.category}, {deleted:false });
+          .findOne({ category: catData.category }, { deleted: false });
 
         if (categoryExist) {
           resolve({ exist: true });
@@ -37,10 +36,9 @@ module.exports = {
         let catDetails = await db
           .get()
           .collection(collection.CATEGORY_COLLECTION)
-          .find({deleted:false})
+          .find({ deleted: false })
           .toArray();
         resolve(catDetails);
-        console.log("category=",catDetails)
       } catch (error) {
         reject(error);
       }
@@ -53,7 +51,7 @@ module.exports = {
         let ShowingCatagory = await db
           .get()
           .collection(collection.CATEGORY_COLLECTION)
-          .find({deleted:false})
+          .find({ deleted: false })
           .toArray();
         resolve(ShowingCatagory);
       } catch (error) {

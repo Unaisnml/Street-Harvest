@@ -32,7 +32,6 @@ router.get("/", async (req, res, next) => {
       category = await categoryHelpers.getAllCategory();
       banner = await bannerHelpers.getAllBanners();
       products = await productHelpers.getAllProducts();
-      console.log(products);
       res.render("user/user-home", {
         users,
         category,
@@ -46,7 +45,6 @@ router.get("/", async (req, res, next) => {
       category = await categoryHelpers.getAllCategory();
       banner = await bannerHelpers.getAllBanners();
       let products = await productHelpers.getAllProducts();
-      console.log("12323 =", category);
       res.render("user/user-home", { category, products, banner, user: true });
     }
   } catch (error) {
@@ -88,11 +86,8 @@ router.post("/userSignup", (req, res) => {
         req.session.body = req.body;
 
         twilioHelpers.doSms(req.body).then((data) => {
-          console.log(req.body);
-
           req.session.body = req.body;
           if (data) {
-            console.log(data);
             res.render("user/otp", { user: true });
           } else {
             res.redirect("/userSignup");
@@ -213,9 +208,7 @@ router.get("/single-product/:id", async (req, res, next) => {
       cartCount = await userHelpers.getCartCount(req.session.user._ids);
       wishListCount = await userHelpers.getWishListCount(req.session.user._id);
     }
-    console.log(prodId);
     let proDetails = await userHelpers.getProductDetails(prodId);
-    console.log(proDetails);
     let users = req.session.user;
     let category = await categoryHelpers.getAllCategory();
     res.render("user/product-details", {
@@ -410,7 +403,6 @@ router.post("/checkout", verifyLogin, async (req, res, next) => {
 /*Apply Coupon */
 router.post("/apply-coupon", verifyLogin, async (req, res, next) => {
   try {
-    console.log(req.body);
     let response = await userHelpers.applyCoupon(
       req.body.couponName,
       req.body.userId
@@ -428,12 +420,10 @@ router.post("/apply-coupon", verifyLogin, async (req, res, next) => {
 /* Verify Payement */
 router.post("/verify-payment", verifyLogin, (req, res, next) => {
   try {
-    console.log(req.body);
     userHelpers
       .verifyPayment(req.body)
       .then(() => {
         userHelpers.changePaymentStatus(req.body["order[receipt]"]).then(() => {
-          console.log("payment successfull");
           res.json({ status: true });
         });
       })
@@ -515,7 +505,6 @@ router.get("/view-order-products/:id", verifyLogin, async (req, res, next) => {
 router.get("/item-cancelled/:id", verifyLogin, async (req, res, next) => {
   try {
     orderId = req.params.id;
-
     let changeStatusCancelled = await userHelpers.changeStatusCancelled(
       orderId
     );
@@ -609,7 +598,6 @@ router.post("/update-profile", verifyLogin, async (req, res, next) => {
 router.post("/change-password", verifyLogin, async (req, res, next) => {
   try {
     userId = req.session.user._id;
-
     let userPassword = await userHelpers.updateUserPassword(userId, req.body);
 
     res.redirect("/profile");

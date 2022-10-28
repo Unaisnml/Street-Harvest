@@ -4,7 +4,7 @@
       <div class="ml-5 col-md-6">
         <h2 class="text-center mt-5">Add New Products</h2>
         <form
-        name="add_product"
+          name="add_product"
           action="/admin/add-product"
           method="post"
           enctype="multipart/form-data"
@@ -21,17 +21,26 @@
 
           <label for="cars">Category:</label><br />
 
-          <select class="form-select"  style="width:520px; height: 30px;" name="Category" id="#">
+          <select
+            class="form-select"
+            style="width:520px; height: 30px;"
+            name="Category"
+            id="#"
+          >
             <option value="volvo">Choose Category</option>
             {{#each catDetails}}
-              <option value="{{this.category}}" >{{this.category}}</option>
+              <option value="{{this.category}}">{{this.category}}</option>
             {{/each}}
           </select><br /><br />
 
           <label for="">Image</label>
           <input type="file" name="Image" class="form-control" />
 
-          <button type="submit" class="btn btn-success mt-4" value="submit" >Submit</button>
+          <button
+            type="submit"
+            class="btn btn-success mt-4"
+            value="submit"
+          >Submit</button>
 
         </form>
       </div>
@@ -42,34 +51,12 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-var img = document.forms['add_product']['Image'];
-var validExt = ["jpeg","png", "jpg"];
-function validation(){
-
-  if(img.value !=''){
-    var img_ext = img.value.substring(img.value.lastIndexOf('.')+1);
-
-    var result = validExt.includes(img_ext);
-    if(result === false){
-      Swal.fire({
-  icon: 'error',
-  title: 'Oops...',
-  text: 'Selected file is Not Image',
-  
-})
-      return false
-    }
-
-  }else{
-     Swal.fire({
-  icon: 'error',
-  title: 'Oops...',
-  text: 'No Images Selected',
-  
-})
-    return false
-  }
-  return true;
-}
+  var img = document.forms['add_product']['Image']; var validExt =
+  ["jpeg","png", "jpg"]; function validation(){ if(img.value !=''){ var img_ext
+  = img.value.substring(img.value.lastIndexOf('.')+1); var result =
+  validExt.includes(img_ext); if(result === false){ Swal.fire({ icon: 'error',
+  title: 'Oops...', text: 'Selected file is Not Image', }) return false } }else{
+  Swal.fire({ icon: 'error', title: 'Oops...', text: 'No Images Selected', })
+  return false } return true; }
 
 </script>

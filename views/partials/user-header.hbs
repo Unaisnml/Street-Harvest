@@ -73,36 +73,34 @@
 </head>
 
 <!-- Offcanvas Menu Begin -->
-    <div class="offcanvas-menu-overlay"></div>
-    <div class="offcanvas-menu-wrapper">
-        <div class="offcanvas__close">+</div>
-        <ul class="offcanvas__widget">
-            {{#if users}}
-            
-            <li><a href="/wishList"><span class="icon_heart_alt"></span>
-                    <div class="tip">{{wishListCount}}</div>
-                </a></li>
-            <li><a href="/cart"><span class="icon_bag_alt"></span>
-                    <div class="tip">{{cartCount}}</div>
-                </a></li>
-                {{/if}}
-        </ul>
-        <div class="offcanvas__logo">
-            <a href=""><img src="" alt=""></a>
-        </div>
-        <div id="mobile-menu-wrap"></div>
-        <div class="offcanvas__auth">
-{{#if users}}
- <a class="color-primary" href="/userLogout">Logout</a>
- {{else}}
-            <a class="color-primary" href="/userLogin">Login</a>
-            {{/if}}
-            {{!-- <a href="#">Register</a> --}}
-        </div>
-    </div>
-    <!-- Offcanvas Menu End -->
+<div class="offcanvas-menu-overlay"></div>
+<div class="offcanvas-menu-wrapper">
+  <div class="offcanvas__close">+</div>
+  <ul class="offcanvas__widget">
+    {{#if users}}
 
-
+      <li><a href="/wishList"><span class="icon_heart_alt"></span>
+          <div class="tip">{{wishListCount}}</div>
+        </a></li>
+      <li><a href="/cart"><span class="icon_bag_alt"></span>
+          <div class="tip">{{cartCount}}</div>
+        </a></li>
+    {{/if}}
+  </ul>
+  <div class="offcanvas__logo">
+    <a href=""><img src="" alt="" /></a>
+  </div>
+  <div id="mobile-menu-wrap"></div>
+  <div class="offcanvas__auth">
+    {{#if users}}
+      <a class="color-primary" href="/userLogout">Logout</a>
+    {{else}}
+      <a class="color-primary" href="/userLogin">Login</a>
+    {{/if}}
+    {{! <a href="#">Register</a> }}
+  </div>
+</div>
+<!-- Offcanvas Menu End -->
 
 <!-- Header Section Begin -->
 <header class="header">
@@ -121,7 +119,7 @@
         </div>
       </div>
       <div class="col-xl-6 col-lg-7">
-        <nav class="header__menu ">
+        <nav class="header__menu">
           <ul>
             <li class=""><a href="/">Home</a></li>
             {{#each category}}
@@ -138,32 +136,56 @@
         <div class="header__right">
           <div class="header__right__auth">
             {{#if users}}
-          
 
               <div class="btn-group">
-<button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    {{users.Name}}
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item font-weight-bold text-primary" href="/profile">My Profile</a></li>
-    <li><a class="dropdown-item font-weight-bold text-primary" href="/orders">My Orders</a></li>
-    <li><a class="dropdown-item font-weight-bold text-primary" href="/userLogout">Logout</a></li>
-  </ul>
-</div>
+                <button
+                  type="button"
+                  class="btn btn-danger dropdown-toggle"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  {{users.Name}}
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a
+                      class="dropdown-item font-weight-bold text-primary"
+                      href="/profile"
+                    >My Profile</a></li>
+                  <li><a
+                      class="dropdown-item font-weight-bold text-primary"
+                      href="/orders"
+                    >My Orders</a></li>
+                  <li><a
+                      class="dropdown-item font-weight-bold text-primary"
+                      href="/userLogout"
+                    >Logout</a></li>
+                </ul>
+              </div>
             {{else}}
               <div class="btn-group">
-  <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    Account
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item font-weight-bold text-primary" href="/userLogin">Login</a></li>
-    <li><a class="dropdown-item font-weight-bold text-primary" href="/userSignup">Signup</a></li>
-  </ul>
-</div>
+                <button
+                  type="button"
+                  class="btn btn-danger dropdown-toggle"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Account
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a
+                      class="dropdown-item font-weight-bold text-primary"
+                      href="/userLogin"
+                    >Login</a></li>
+                  <li><a
+                      class="dropdown-item font-weight-bold text-primary"
+                      href="/userSignup"
+                    >Signup</a></li>
+                </ul>
+              </div>
             {{/if}}
           </div>
           <ul class="header__right__widget">
-            {{!-- <li><span class="icon_search search-switch"></span></li> --}}
+            {{! <li><span class="icon_search search-switch"></span></li> }}
             {{#if users}}
               <li><a href="/wishList"><span class="icon_heart_alt"></span>
                   <div class="tip" id="whishlist-count">{{wishListCount}}</div>
@@ -203,6 +225,5 @@
   integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
   crossorigin="anonymous"
 ></script>
-
 
 <script src="/user/assets/js/script.js"></script>

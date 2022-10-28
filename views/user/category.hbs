@@ -1,85 +1,58 @@
 <section>
-    <div class="container ">
-        <div class="row">
-            {{#each catProducts }}
+  <div class="container">
+    <div class="row">
+      {{#each catProducts}}
 
-            <div class="col-md-3 p-3 d-flex justify-content-around">
-                <div class="card mt-4 " style="width: 20rem; height:25rem">
-                    <a href="/single-product/{{this._id}}">
-                        <img src="product-images/{{this._id}}.jpg" class="card-img-top" alt="..." style="height: 14rem;">
+        <div class="col-md-3 p-3 d-flex justify-content-around">
+          <div class="card mt-4" style="width: 20rem; height:25rem">
+            <a href="/single-product/{{this._id}}">
+              <img
+                src="product-images/{{this._id}}.jpg"
+                class="card-img-top"
+                alt="..."
+                style="height: 14rem;"
+              />
 
-                    </a>
+            </a>
 
-                    <div class="card-body">
-                        <h5 class="card-title">{{this.Name}}</h5>
-                        <p class="card-text">₹ {{this.Price}}</p>
-                        <p class="card-text">{{this.Description}}</p>
+            <div class="card-body">
+              <h5 class="card-title">{{this.Name}}</h5>
+              <p class="card-text">₹ {{this.Price}}</p>
+              <p class="card-text">{{this.Description}}</p>
 
-                        {{!-- <i class="fas fa-camera fa-9x"></i> --}}
-                        <button onclick="addtoWishList('{{this._id}}')" class=" bi-cart-fill btn btn-warning"
-                         style="font-size: 10px">Add Wishlist</button>
-                        <button onclick="addToCart('{{this._id}}')" class=" bi-cart-fill btn btn-success"
-                            style='font-size:10px '> Add to Cart</button>
+              {{! <i class="fas fa-camera fa-9x"></i> }}
+              <button
+                onclick="addtoWishList('{{this._id}}')"
+                class="bi-cart-fill btn btn-warning"
+                style="font-size: 10px"
+              >Add Wishlist</button>
+              <button
+                onclick="addToCart('{{this._id}}')"
+                class="bi-cart-fill btn btn-success"
+                style="font-size:10px "
+              > Add to Cart</button>
 
-
-                    </div>
-                </div>
             </div>
-
-            {{/each}}
+          </div>
         </div>
+
+      {{/each}}
     </div>
+  </div>
 </section>
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
- function addToCart(prodId) {
-  $.ajax({
-    url: "/add-to-cart/" + prodId,
-    method: "get",
-    success: (response) => {
-      if (response.status) {
-        Swal.fire({
-          
-          icon: 'success',
-          title: 'Added to Cart',
-          showConfirmButton: false,
-          timer: 800
-        })
-        let count = $("#cart-count").html();
-        count = parseInt(count) + 1;
-        $("#cart-count").html(count);
-
-      } else {
-        location.href = "/userLogin";
-      }
-    },
-  });
-}
-
-function addtoWishList(prodId) {
-  $.ajax({
-    url: "/add-to-wishList/" + prodId,
-    method: "get",
-    success: (response) => {
-      if (response.status) {
-        Swal.fire({
-          
-          icon: 'success',
-          title: 'Added to Wishlist',
-          showConfirmButton: false,
-          timer: 800
-        })
-        let count = $("#whishlist-count").html();
-        count = parseInt(count) + 1;
-        $("#whishlist-count").html(count);
-      } else {
-        location.href = "/userLogin";
-      }
-    },
-  });
-}
+  function addToCart(prodId) { $.ajax({ url: "/add-to-cart/" + prodId, method:
+  "get", success: (response) => { if (response.status) { Swal.fire({ icon:
+  'success', title: 'Added to Cart', showConfirmButton: false, timer: 800 }) let
+  count = $("#cart-count").html(); count = parseInt(count) + 1;
+  $("#cart-count").html(count); } else { location.href = "/userLogin"; } }, });
+  } function addtoWishList(prodId) { $.ajax({ url: "/add-to-wishList/" + prodId,
+  method: "get", success: (response) => { if (response.status) { Swal.fire({
+  icon: 'success', title: 'Added to Wishlist', showConfirmButton: false, timer:
+  800 }) let count = $("#whishlist-count").html(); count = parseInt(count) + 1;
+  $("#whishlist-count").html(count); } else { location.href = "/userLogin"; } },
+  }); }
 </script>
-
-
