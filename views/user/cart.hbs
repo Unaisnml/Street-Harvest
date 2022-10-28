@@ -217,6 +217,7 @@
 
 <script>
     function changeQuantity(cartId, prodId, userId, count) {
+        console.log('call')
         console.log(cartId, prodId, userId, count)
         let quantity = parseInt(document.getElementById(prodId).innerHTML)
         count = parseInt(count)
@@ -245,7 +246,7 @@
   if (willDelete) {
     $("#cart-count").load(location.href+" #cart-count");
      
-    location.reload()jjjjjjjjj
+    location.reload()
   } 
   else {
     swal("Your Item is safe!");

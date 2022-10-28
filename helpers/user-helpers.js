@@ -374,6 +374,7 @@ module.exports = {
   },
 
   changeProductQuantity: (details) => {
+    console.log(details,'hiii');
     details.count = parseInt(details.count);
     details.quantity = parseInt(details.quantity);
     console.log(details.count);
