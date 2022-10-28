@@ -310,7 +310,7 @@ module.exports = {
   },
 
   getCartProducts: (userId) => {
-    console.log(userId);
+    console.log('id',userId);
     return new Promise(async (resolve, reject) => {
       try {
         let cartItems = await db
@@ -493,7 +493,7 @@ module.exports = {
   checkOut: (order, products, total) => {
     return new Promise((resolve, reject) => {
       try {
-        console.log(order, products, total);
+        console.log("jjjjjjjjjjj",order, products, total);
         let status = order["payement-method"] == "COD" ? "placed" : "pending";
         let orderObj = {
           deliveryDetails: {
@@ -506,7 +506,7 @@ module.exports = {
           products: products,
           totalAmount: total,
           status: status,
-          date: new Date().toDateString()
+          date: new Date()
         };
 
         db.get()

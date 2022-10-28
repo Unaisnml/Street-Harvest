@@ -363,14 +363,14 @@ router.get("/checkout", verifyLogin, async (req, res, next) => {
     let addressId = req.query.id;
     let userId = req.session.user._id;
     let users = req.session.user;
-    let total = await userHelpers.getTotalAmount(req.session.user._id);
-    let products = await userHelpers.getCartProducts(req.session._id);
+    let total = await userHelpers.getTotalAmount(userId);
+    let products = await userHelpers.getCartProducts(userId);
     let category = await categoryHelpers.getAllCategory();
     let viewCoupon = await adminHelpers.viewCoupon();
     let selectAddress = await userHelpers.placeAddress(addressId, userId);
-    let userAddress = await userHelpers.userAddress(req.session.user._id);
-    let cartCount = await userHelpers.getCartCount(req.session.user._id);
-    let wishListCount = await userHelpers.getWishListCount(req.session.user._id);
+    let userAddress = await userHelpers.userAddress(userId);
+    let cartCount = await userHelpers.getCartCount(userId);
+    let wishListCount = await userHelpers.getWishListCount(userId);
     res.render("user/checkout", {
       users,
       total,
