@@ -39,7 +39,12 @@
           </div>
         </div>
 
-        <form action="" id="checkout-form" class="checkout__form">
+        <form
+          action="/checkout"
+          method="post"
+          id="checkout-form"
+          class="checkout__form"
+        >
           <div class="row">
             <div class="col-lg-8">
               <h5>Billing detail</h5>
@@ -298,42 +303,118 @@
 </html>
 
 <script>
-  $("#checkout-form").submit((e) => { e.preventDefault() $.ajax({ url:
-  '/checkout', method: 'post', data: $('#checkout-form').serialize(), success:
-  (response) => { if (response.codSuccess) { location.replace('/order-success')
-  } else { razorpayPayment(response) } } }) }) function razorpayPayment(order) {
-  var options = { "key": "rzp_test_WHDWrOcFGOoWv2", // Enter the Key ID
-  generated from the Dashboard "amount": order.amount, // Amount is in currency
-  subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-  "currency": "INR", "name": "ToyCare", "description": "Test Transaction",
-  "image": "https://example.com/your_logo", "order_id": order.id, //This is a
-  sample Order ID. Pass the `id` obtained in the response of Step 1 "handler":
-  function (response) { verifyPayment(response,order) }, "prefill": { "name":
-  "Gaurav Kumar", "email": "gaurav.kumar@example.com", "contact": "9999999999"
-  }, "notes": { "address": "Razorpay Corporate Office" }, "theme": { "color":
-  "#3399cc" } }; var rzp1 = new Razorpay(options); rzp1.open(); } function
-  verifyPayment(payement, order) { $.ajax({ url: '/verify-payment', data: {
-  payement, order }, method: 'post', success:(response)=>{ if(response.status){
-  location.href = '/order-success' }else{ alert("Payment failed") } } }) }
-  function applyCoupon() { var userId = document.getElementById('userId').value
-  console.log(userId) var coupon = document.getElementById('coupon').value var
-  subTotal = document.getElementById('subTotal').innerHTML $.ajax({ url:
-  '/apply-coupon', data: { couponName: coupon, userId: userId }, method: 'post',
-  success: (response) => { if (response.expired) { alert("Sorry coupon have
-  expired") } else if (response.notAvailable) { alert("Invalid coupon") } else
-  if (response.used) { alert("Coupon already used") } else { var discount =
-  response.Value var grandTotal = subTotal - discount
+
+  $("#checkout-form").submit((e) => {
+     e.preventDefault()
+      $.ajax({ 
+      url:'/checkout',
+       method: 'post',
+      data: $('#checkout-form').serialize(),
+       success:(response) => {
+         if (response.codSuccess) {
+           location.href = '/order-success'
+  } else {
+     razorpayPayment(response)
+      } 
+      } 
+      })
+     }) 
+      
+
+    function razorpayPayment(order) {
+  var options = { 
+    "key": "rzp_test_WHDWrOcFGOoWv2", // Enter the Key ID generated from the Dashboard 
+    "amount": order.amount, // Amount is in currencysubunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+  "currency": "INR",
+   "name": "ToyCare", 
+   "description": "Test Transaction",
+  "image": "https://example.com/your_logo",
+   "order_id": order.id, //This is asample Order ID. Pass the `id` obtained in the response of Step 1
+    "handler":function (response) {
+       verifyPayment(response,order)
+        },
+         "prefill": { 
+          "name":"Gaurav Kumar",
+           "email": "gaurav.kumar@example.com",
+            "contact": "9999999999"
+  }, 
+  
+  "notes": {
+     "address": "Razorpay Corporate Office"
+      }, 
+      "theme": { 
+        "color": "#3399cc" 
+        } 
+        }; 
+        
+        var rzp1 = new Razorpay(options);
+         rzp1.open();
+          } 
+
+
+  function verifyPayment(payement, order) {
+             $.ajax({
+               url: '/verify-payment',
+                data: {
+                   payement, order
+                    },               
+                    method: 'post',
+                     success:(response)=>{
+                       if(response.status){
+                        Swal.fire(
+      'payment successful',
+      '',
+      'success'
+     )
+                        location.href = '/order-success'
+                         }else{ 
+                          alert("Payment failed")
+                           }
+                            }
+                             })
+                              }
+
+
+  function applyCoupon() {
+     var userId = document.getElementById('userId').value
+  console.log(userId)
+   var coupon = document.getElementById('coupon').value
+  var subTotal = document.getElementById('subTotal').innerHTML
+   $.ajax({
+     url:'/apply-coupon', 
+     data: { 
+      couponName: coupon,
+      userId: userId
+       },
+    method: 'post',
+  success: (response) => {
+     if (response.expired) { 
+      alert("Sorry coupon haveexpired") 
+      } else if (response.notAvailable) {
+         alert("Invalid coupon")
+          } else if (response.used) {
+             alert("Coupon already used") 
+             } else { 
+              var discount =response.Value
+               var grandTotal = subTotal - discount
   document.getElementById('discount').innerHTML = discount
   document.getElementById('grandTotal').innerHTML = grandTotal
   document.getElementById('offer').value = discount
-  document.getElementById('finalprice').value = grandTotal } } }) }
+  document.getElementById('finalprice').value = grandTotal 
+  } 
+  } 
+  }) 
+  }
 </script>
 
 <script>
   function myFunction() { // Get the text field var copyText =
   document.getElementById("myInput"); // Select the text field
-  copyText.select(); copyText.setSelectionRange(0, 99999); // For mobile devices
+  copyText.select(); 
+  copyText.setSelectionRange(0, 99999); // For mobile devices
   // Copy the text inside the text field
-  navigator.clipboard.writeText(copyText.value); // Alert the copied text
-  //Swal.fire('Coupon Copied') }
-</script>
+  navigator.clipboard.writeText(copyText.value); 
+  Swal.fire('Coupon Copied') } // Alert the copied text
+  </script>
+
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

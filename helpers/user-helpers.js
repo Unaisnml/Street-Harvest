@@ -5,9 +5,9 @@ const { response } = require("express");
 const objectId = require("mongodb").ObjectId;
 const Razorpay = require("razorpay");
 const { resolve } = require("path");
-let instance = new Razorpay({
-  key_id: process.env.key_id,
-  key_secret: process.env.key_secret,
+var instance = new Razorpay({
+  key_id: process.env.KEY_ID,
+  key_secret: process.env.KEY_SECRET
 });
 
 module.exports = {
