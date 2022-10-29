@@ -367,7 +367,7 @@ router.get("/delete-banner/:id", (req, res, next) => {
 
 //Dashboard
 
-router.get('/dash-board',async(req,res,next)=>{
+router.get("/dash-board", async (req, res, next) => {
   let userCount = await userHelpers.getUserCount();
   let orderCount = await userHelpers.getOrderCount();
   let totalDelivered = await userHelpers.totalDelivered();
@@ -375,8 +375,17 @@ router.get('/dash-board',async(req,res,next)=>{
   let monthamount = await userHelpers.totalMonthAmount();
   let codCount = await userHelpers.totalCOD();
   let ONLINECount = await userHelpers.totalONLINE();
-  res.render('admin/admin-home',{userCount, orderCount, totalDelivered, cancelled, monthamount, codCount, ONLINECount, admin:true})
-})
+  res.render("admin/admin-home", {
+    userCount,
+    orderCount,
+    totalDelivered,
+    cancelled,
+    monthamount,
+    codCount,
+    ONLINECount,
+    admin: true,
+  });
+});
 
 router.use(function (req, res, next) {
   next(createError(404));
