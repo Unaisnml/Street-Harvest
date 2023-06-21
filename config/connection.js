@@ -7,7 +7,7 @@ const state = {
 module.exports.connect = function (done) {
     // const url = 'mongodb://localhost:27017'
     // const dbname = 'eComerce'
-    const url = 'mongodb+srv://UNAISKSD:Unais%40673@cluster0.zfkt1ce.mongodb.net/streetharvest?retryWrites=true&w=majority'
+    const url = 'mongodb+srv://UNAISKSD:Unais673@cluster0.zfkt1ce.mongodb.net/streetharvest?retryWrites=true&w=majority'
     const dbname = 'streetharvest'
 
     mongoClient.connect(url, (err, data) =>{

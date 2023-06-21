@@ -125,7 +125,8 @@ router.post("/add-category", (req, res, next) => {
   try {
     categoryHelpers.addCategory(req.body).then((response) => {
       console.log(req.body);
-      res.json(response);
+      res.redirect("/admin/add-category");
+      // res.json(response);
     });
   } catch (error) {
     next(error);
